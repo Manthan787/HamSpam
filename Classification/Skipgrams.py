@@ -4,6 +4,15 @@ from nltk import ngrams
 
 
 def skipgrams(sequence, n, k):
+    """
+    :param sequence: a list of words/tokens
+    :param n: length of each gram
+    :param k: slop
+    :return: Skipgrams fro the given sequence
+    :example: "Insurgents killed in fight" with n=2, k=2 would yield
+                 [("Insurgents", "killed"), ("Insurgents", "in"),
+                 ("Insurgents", "fight"),("killed", "in"), ("killed", "fight")]
+    """
     for ngram in ngrams(sequence, n + k, pad_right=True):
         head = ngram[:1]
         tail = ngram[1:]
@@ -13,20 +22,17 @@ def skipgrams(sequence, n, k):
             yield head + skip_tail
 
 
-def tokenize(text):
+def find_skipgrams(text):
+    """
+        Finds skipgrams in a given string.
+        For efficiency purposes, the skipgrams are only searched per sentence,
+        as opposed to extending the chain to the entire text.
+    """
     sent_tokens = sent_tokenize(text)
     tokenizer = RegexpTokenizer(r'\w+')
-    tokens = []
+    grams = []
     for sent in sent_tokens:
-        tokens += tokenizer.tokenize(sent)
-
-    return tokens
-
-
-def find_skipgrams(text):
-    tokens = tokenize(text)
-    grams = skipgrams(tokens, 2, 2)
+        tokens = tokenizer.tokenize(sent)
+        grams += skipgrams(tokens, 2, 2)
 
     return grams
-
-
