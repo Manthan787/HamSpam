@@ -8,8 +8,8 @@ es = Elasticsearch(timeout=1000)
 
 def write_split_to_file(split):
     """
-        Gets all the documents for given split ("train" or "test") and
-        writes them to file.
+        Fetches all the documents for the given split ("train" or "test") from
+        Elasticsearch and writes them to file.
     """
     ALL_DOCS = '''
         {{
