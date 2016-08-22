@@ -1,6 +1,8 @@
 DATA_PATH = '/Users/admin/Documents/CS6200/trec07p/data'
 FEEDBACK_PATH = '/Users/admin/Documents/CS6200/trec07p/full/index'
-
+# SPLITTER Config
+TRAIN_PORTION = 0.8
+TEST_PORTION = 0.2
 
 # Elastic search config
 INDEX = 'spam'
