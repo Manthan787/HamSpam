@@ -9,6 +9,11 @@ es = Elasticsearch(timeout=1000)
 
 
 def extract():
+    """
+    :return: Extracted features from Elasticsearch
+             The features depend on the values selected in the
+             extractFeatures.groovy script
+    """
     features = []
 
     page = es.search(index=INDEX,
@@ -35,6 +40,9 @@ def extract():
 
 
 def extract_skipgrams():
+    """
+        Extracts skipgrams
+    """
     print "Extracting skipgrams ..."
     features = []
 
