@@ -2,6 +2,9 @@ from config import FEEDBACK_PATH
 
 
 def load_labels():
+    """
+        Load labels from the file labels file
+    """
     print "Loading labels!"
     with open(FEEDBACK_PATH, 'r') as f:
         lines = f.readlines()

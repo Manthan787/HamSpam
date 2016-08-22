@@ -19,6 +19,9 @@ class BatchParser(object):
 
 
     def parse(self):
+        """
+        :return: parsed files with all the Elasticsearch properties
+        """
         files = os.listdir(self.data_path)
         parsed_files = {}
         i = 0
@@ -35,6 +38,10 @@ class BatchParser(object):
 
 
     def __parseEmail(self, file):
+        """
+        :param file: the name of the file containing the email contents
+        :return: Parsed email
+        """
         email_path = os.path.join(self.data_path, file)
         with open(email_path, 'r') as e:
             message = email.message_from_file(e)
@@ -64,6 +71,11 @@ class BatchParser(object):
 
 
     def __parseHTML(self, html):
+        """
+        :param html: HTML document
+        :return: Extract text from it after stripping of all scripts and style
+                 markup
+        """
         soup = BeautifulSoup(html, 'lxml')
         for elem in soup.findAll(['script', 'style']):
             elem.extract()
